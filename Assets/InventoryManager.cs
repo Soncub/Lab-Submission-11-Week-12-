@@ -9,6 +9,7 @@ class InventoryManager : MonoBehaviour
     public InventoryItem[] InventoryArray;
     // Name to search for with Linear Search
     public string searchName;
+    public int searchID;
 
     private void Start()
     {
@@ -19,7 +20,17 @@ class InventoryManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("No Result Found!");
+            Debug.Log("No Result Found for Linear Search!");
+        }
+
+        result = BinarySearchByID(searchID);
+        if (result != -1)
+        {
+            Debug.Log("Binary Search Result: " + InventoryArray[result].Name);
+        }
+        else
+        {
+            Debug.Log("No Result Found for Binary Search!");
         }
     }
 
@@ -30,6 +41,36 @@ class InventoryManager : MonoBehaviour
         {
             if (InventoryArray[i].Name == itemName)
                 return i;
+        }
+        return -1;
+    }
+
+    // Binary Search Method
+    int BinarySearchByID(int itemID)
+    {
+        if (InventoryArray.Length == 0)
+        {
+            Debug.Log("No Array Declared.");
+            return -1;
+        }
+        int left = 0;
+        int right = InventoryArray.Length - 1;
+
+        while (left <= right)
+        {
+            int mid = left + (right - left) / 2;
+            if (InventoryArray[mid].ID == itemID)
+            {
+                return mid;
+            }
+            else if (InventoryArray[mid].ID < itemID)
+            {
+                left = mid + 1;
+            }
+            else
+            {
+                right = mid - 1;
+            }
         }
         return -1;
     }

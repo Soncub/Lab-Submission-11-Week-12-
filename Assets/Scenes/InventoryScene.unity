@@ -155,10 +155,14 @@ MonoBehaviour:
   - ID: 0
     Name: Sword
     Value: 0
-  - ID: 0
+  - ID: 1
     Name: Shield
     Value: 0
+  - ID: 2
+    Name: Orb
+    Value: 0
   searchName: Orb
+  searchID: 2
 --- !u!4 &229035643
 Transform:
   m_ObjectHideFlags: 0
