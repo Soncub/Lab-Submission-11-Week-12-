@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using UnityEngine;
 
 class InventoryManager : MonoBehaviour
@@ -73,5 +74,42 @@ class InventoryManager : MonoBehaviour
             }
         }
         return -1;
+    }
+
+    //QuickSort Partition method
+    public int Partition(InventoryItem[] InventoryArray, int first, int last)
+    {
+        int pivot = InventoryArray[last].Value;
+        int smaller = first;
+
+        for (int element = first; element < last; element++)
+        {
+            if (InventoryArray[element].Value < pivot)
+            {
+                element++;
+
+                InventoryItem temp = InventoryArray[smaller];
+                InventoryArray[smaller] = InventoryArray[element];
+                InventoryArray[smaller] = temp;
+            }
+        }
+
+        InventoryItem tempNext = InventoryArray[smaller + 1];
+        InventoryArray[smaller + 1] = InventoryArray[last];
+        InventoryArray[last] = tempNext;
+
+        return smaller + 1;
+    }
+
+    //QuickSort method
+    public void QuickSort(InventoryItem[] InventoryArray, int first, int last)
+    {
+        if (first < last)
+        {
+            int pivot = Partition(InventoryArray, first, last);
+
+            QuickSort(InventoryArray, first, pivot - 1);
+            QuickSort(InventoryArray, pivot + 1, last);
+        }
     }
 }
