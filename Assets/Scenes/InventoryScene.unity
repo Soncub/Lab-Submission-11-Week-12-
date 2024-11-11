@@ -154,13 +154,13 @@ MonoBehaviour:
   InventoryArray:
   - ID: 0
     Name: Sword
-    Value: 0
+    Value: 3
   - ID: 1
     Name: Shield
-    Value: 0
+    Value: 2
   - ID: 2
     Name: Orb
-    Value: 0
+    Value: 1
   searchName: Orb
   searchID: 2
 --- !u!4 &229035643
