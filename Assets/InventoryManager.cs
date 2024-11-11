@@ -36,15 +36,13 @@ class InventoryManager : MonoBehaviour
         }
 
         //QuickSort called;
-        SortbyValue(InventoryArray, 0, InventoryArray.Length - 1);
- 
-        //QuickSortByValue(InventoryArray, 0, InventoryArray.Length - 1);
+        var sortedByValue = QuickSortbyValue(InventoryArray, 0, InventoryArray.Length - 1);
 
-        //Debug.Log("Inventory sorted by value:");
-        //for (int i = 0; i < InventoryArray.Length; i++)
-        //{
-        //    Debug.Log(InventoryArray[i].Name);
-        //}
+        Debug.Log("Inventory sorted by value:");
+        for (int i = 0; i < sortedByValue.Length; i++)
+        {
+            Debug.Log(sortedByValue[i].Name);
+        }
     }
 
     // Linear Search Method
@@ -88,62 +86,39 @@ class InventoryManager : MonoBehaviour
         return -1;
     }
 
-    //QuickSort method
-    public void QuickSortByValue(InventoryItem[] InventoryArray, int first, int last)
+    //QuickSort by Value method
+    public InventoryItem[] QuickSortbyValue(InventoryItem[] array, int leftIndex, int rightIndex)
     {
-        if (first < last)
+        var i = leftIndex;
+        var j = rightIndex;
+        var pivot = array[leftIndex].Value;
+        while (i <= j)
         {
-            int pivot = PartitionByValue(InventoryArray, first, last);
-
-            QuickSortByValue(InventoryArray, first, pivot - 1);
-            QuickSortByValue(InventoryArray, pivot + 1, last);
-        }
-    }
-    
-    //QuickSort Partition method
-    public int PartitionByValue(InventoryItem[] InventoryArray, int first, int last)
-    {
-        int pivot = InventoryArray[last].Value;
-        int smaller = first - 1;
-         
-        for (int element = first; element < last; element++)
-        {
-            if (InventoryArray[element].Value > pivot)
+            while (array[i].Value < pivot)
             {
-                InventoryItem temp = InventoryArray[element];
-                InventoryArray[element] = InventoryArray[element + 1];
-                InventoryArray[element + 1] = temp; 
+                i++;
+            }
+
+            while (array[j].Value > pivot)
+            {
+                j--;
+            }
+            if (i <= j)
+            {
+                InventoryItem temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+                i++;
+                j--;
             }
         }
 
-        Debug.Log("Partitioned Inventory:");
-        for (int i = 0; i < InventoryArray.Length; i++)
-        {
-            Debug.Log(InventoryArray[i].Name);
-        }
-
-        return pivot;
+        if (leftIndex < j)
+            QuickSortbyValue(array, leftIndex, j);
+        if (i < rightIndex)
+            QuickSortbyValue(array, i, rightIndex);
+        return array;
     }
 
-    //SimpleSort method
-    public void SortbyValue(InventoryItem[] InventoryArray,  int first, int last)
-    {
-        for (int element = first; element < last; element++)
-        {
-            if (InventoryArray[element].Value > InventoryArray[last].Value)
-            {
-                InventoryItem temp = InventoryArray[last];
-                InventoryArray[last] = InventoryArray[element];
-                InventoryArray[element] = temp;
-            }
-        }
 
-        Debug.Log("Partitioned Inventory:");
-        for (int i = 0; i < InventoryArray.Length; i++)
-        {
-            Debug.Log(InventoryArray[i].Name);
-        }
-    }
-
-    
 }

@@ -161,8 +161,14 @@ MonoBehaviour:
   - ID: 2
     Name: Orb
     Value: 1
+  - ID: 7
+    Name: Armor
+    Value: 5
+  - ID: 9
+    Name: Bow
+    Value: 4
   searchName: Orb
-  searchID: 2
+  searchID: 9
 --- !u!4 &229035643
 Transform:
   m_ObjectHideFlags: 0
